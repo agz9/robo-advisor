@@ -1,5 +1,30 @@
 # this is the "app/robo_advisor.py" file
 
+import requests 
+import json
+
+
+#
+# info outputs 
+#
+
+request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo"
+
+response = requests.get(request_url)
+# print(type(response)) #> <class "requests.models.Response">
+# print(response.status_code)m #> 200
+# print(response.text) #> type str
+
+
+parsed_response = json.loads(response.text)
+# converting type string to dictionary so we can work with the text
+
+breakpoint()
+
+#
+# info outputs 
+#
+
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
 print("-------------------------")
