@@ -33,6 +33,18 @@ latest_day = dates[0]
 
 latest_closed = tsd[latest_day[0]]["4. close"]
 
+
+# high_prices = [1, 2, 3, 4]
+# maximum of high prices
+# recent_high = max(high_prices)
+
+high_prices = []
+
+for date in dates:
+    high_price = tsd[date]["2. high"]
+    high_prices.append(float(high_price))
+
+recent_high = max(high_prices)
 breakpoint()
 
 #
@@ -53,7 +65,7 @@ print(f"LATEST DAY: {last_refreshed}")
 # string interpolation using format string
 # could also use concatenation
 print(f"LATEST CLOSE: {to_usd(float(latest_closed))}")
-print("RECENT HIGH: $101,000.00")
+print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print("RECENT LOW: $99,000.00")
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
