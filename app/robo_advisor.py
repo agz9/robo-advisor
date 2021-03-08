@@ -1,7 +1,10 @@
 # this is the "app/robo_advisor.py" file
 
-import requests 
+import csv
 import json
+import os
+# keep modules before packages 
+import requests 
 
 # function to convert float or int to usd-formatted str
 # credit to shopping cart project 
@@ -30,8 +33,7 @@ tsd = parsed_response["Time Series (Daily)"] # time series daily
 dates = list(tsd.keys())
 
 latest_day = dates[0]
-
-latest_closed = tsd[latest_day[0]]["4. close"]
+latest_closed = tsd[latest_day]["4. close"]
 
 
 # high_prices = [1, 2, 3, 4]
@@ -52,7 +54,7 @@ recent_high = max(high_prices)
 recent_low = min(low_prices)
 # takes the minimum of the low prices
 
-breakpoint()
+# breakpoint()
 #
 # info outputs 
 #
@@ -79,3 +81,19 @@ print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
+
+#csv_file_path = "data/prices.csv" # a relative file path 
+
+csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
+
+
+with open(csv_file_path, "w") as csv_file: 
+# "w" means "open the file for writing"
+    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
+    writer.writeheader() # uses fieldnames set above
+    writer.writerow({"city": "New York", "name": "Yankees"})
+    writer.writerow({"city": "New York", "name": "Mets"})
+    writer.writerow({"city": "Boston", "name": "Red Sox"})
+    writer.writerow({"city": "New Haven", "name": "Ravens"})
+
+
