@@ -59,6 +59,40 @@ recent_low = min(low_prices)
 # info outputs 
 #
 
+#csv_file_path = "data/prices.csv" # a relative file path 
+csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
+# credit to https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/modules/os.md
+# uses the os module 
+# .. helps navigate up one directory to the root 
+# enables us to standardize paths across operating systems 
+
+csv_headers = ["timestamp", "open", "high", "low", "close", "volume"]
+
+with open(csv_file_path, "w") as csv_file: 
+# "w" means "open the file for writing"
+    writer = csv.DictWriter(csv_file, fieldnames = csv_headers)
+    # need to get a list of headers from the original url 
+    writer.writeheader() # uses fieldnames set above
+
+    # some looping here to write each row 
+    writer.writerow({
+        "timestamp": "TODO",
+        "open": "TODO",
+        "high": "TODO",
+        "low": "TODO",
+        "close": "TODO",
+        "volume": "TODO"
+        })
+    
+    writer.writerow({
+        "timestamp": "TODO",
+        "open": "TODO",
+        "high": "TODO",
+        "low": "TODO",
+        "close": "TODO",
+        "volume": "TODO"
+        })
+
 
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
@@ -81,19 +115,5 @@ print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
-
-#csv_file_path = "data/prices.csv" # a relative file path 
-
-csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
-
-
-with open(csv_file_path, "w") as csv_file: 
-# "w" means "open the file for writing"
-    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
-    writer.writeheader() # uses fieldnames set above
-    writer.writerow({"city": "New York", "name": "Yankees"})
-    writer.writerow({"city": "New York", "name": "Mets"})
-    writer.writerow({"city": "Boston", "name": "Red Sox"})
-    writer.writerow({"city": "New Haven", "name": "Ravens"})
 
 
