@@ -3,8 +3,11 @@
 import csv
 import json
 import os
-# keep modules before packages 
+
+from dotenv import load_dotenv
 import requests 
+
+load_dotenv() #> loads contents of the .env file into the script's environment
 
 # function to convert float or int to usd-formatted str
 # credit to shopping cart project 
@@ -15,7 +18,13 @@ def to_usd(my_price):
 # info outputs 
 #
 
-request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo"
+api_key = os.environ.get)"ALPHAVANTAGE_API_KEY") # "demo"
+# will read key from .env file 
+# print(api_key)
+
+symbol = "IBM" #TODO accept user input 
+
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
 
 response = requests.get(request_url)
 # print(type(response)) #> <class "requests.models.Response">
