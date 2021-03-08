@@ -18,7 +18,7 @@ def to_usd(my_price):
 # info outputs 
 #
 
-api_key = os.environ.get)"ALPHAVANTAGE_API_KEY") # "demo"
+api_key = os.environ.get("ALPHAVANTAGE_API_KEY") # "demo"
 # will read key from .env file 
 # print(api_key)
 
@@ -98,10 +98,14 @@ print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
-print("REQUEST AT: 2018-02-20 02:00pm")
-# date time module from last project 
-#
-#
+# date time module from Shopping Cart project
+# credit to https://www.programiz.com/python-programming/time
+import time
+# allows us to use time. functions 
+named_tuple = time.localtime() 
+# get struct_time
+time_string = time.strftime("%Y-%m-%d, %H:%M:%S", named_tuple)
+print("REQUEST AT: ", time_string)
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 # string interpolation using format string
