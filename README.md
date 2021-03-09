@@ -33,6 +33,16 @@ From inside of the virtual environment, stocks-env, install pip:
 pip install -r requirements.txt  
 ```
 
+## More Setup
+
+Before using or developing this application, take a moment to [obtain an AlphaVantage API Key](https://www.alphavantage.co/support/#api-key) (e.g. "abc123").
+
+After obtaining an API Key, create a new called ".env" (in your local repo, NOT your remote repo), and update the contents of the ".env" file to specify your real API Key:
+
+    ALPHAVANTAGE_API_KEY="abc123"
+
+Don't worry, the ".env" has already been [ignored](/.gitignore) from version control for you!
+
 ### Using Robo-Advisor 
 
 From inside stocks-env (or whatever you decide to name the virtual environment), run the code using the following code:
