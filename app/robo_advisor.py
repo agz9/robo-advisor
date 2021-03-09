@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 from getpass import getpass 
 import requests 
+import datetime
 
 load_dotenv() # loads content of the .env file into the script's environment (e.g. the secret key)
 # credit to https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/packages/dotenv.md
@@ -19,10 +20,10 @@ def to_usd(my_price):
 # info outputs 
 #
 
-user_choice = input("Please enter a valid stock ticker, between 1-5 characters long: ")
+user_symbol = input("Please enter a valid stock ticker, between 1-5 characters long: ")
 
 contains_digit = False
-for character in user_choice:
+for character in user_symbol:
     if character.isdigit():
         contains_digit = True
 if contains_digit == False:
@@ -31,12 +32,12 @@ else:
     print("OOPS! That doesn't look like a correct stock ticker. ")
     exit()
 
-symbol = user_choice
+ticker = user_symbol
 api_key = os.environ.get("ALPHAVANTAGE_API_KEY") # was previously "demo"
 # will read key from .env file 
 # print(api_key) # would not want to do this and expose the key 
 
-request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey={api_key}"
 
 response = requests.get(request_url)
 # print(type(response)) #> <class "requests.models.Response">
@@ -45,8 +46,8 @@ response = requests.get(request_url)
 parsed_response = json.loads(response.text)
 # converting type string to dictionary so we can work with the text
 
-key_to_lookup = "Error Message"
-if key_to_lookup in parsed_response:
+error_message = "Error Message"
+if error_message in parsed_response:
     print("Sorry we could not find any trading data for that symbol. Please try again. ")
     exit()
 else:
@@ -117,7 +118,7 @@ else:
 
 
 print("-------------------------")
-print(f"Selected Stock Symbol: {symbol}")
+print(f"Selected Stock Symbol: {ticker}")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
 # date time module from Shopping Cart project
@@ -127,7 +128,8 @@ import time
 named_tuple = time.localtime() 
 # get struct_time
 time_string = time.strftime("%Y-%m-%d, %H:%M:%S", named_tuple)
-print("Run at: ", time_string)
+run_time_date = datetime.datetime.now()
+print("Run at: " + run_time_date.strftime("%I:%M %p") + " on " + run_time_date.strftime("%B %d") + ", " + run_time_date.strftime("%Y"))
 print("-------------------------")
 print(f"Latest data from: {last_refreshed}")
 # string interpolation using format string
@@ -138,6 +140,8 @@ print(f"Recent Low: {to_usd(float(recent_low))}")
 print("-------------------------")
 print(f"Recommendation: {recommended_choice}")
 print(f"Recommendation Reason: {recommended_reason}")
+print("-------------------------")
+print(f"Recommendation Reason: {csv_file_path}")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
