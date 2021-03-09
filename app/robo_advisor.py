@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from getpass import getpass 
 import requests 
 import datetime
+import seaborn as sns
 
 load_dotenv() # loads content of the .env file into the script's environment (e.g. the secret key)
 # credit to https://github.com/prof-rossetti/georgetown-opim-243-201901/blob/master/notes/python/packages/dotenv.md
@@ -146,3 +147,11 @@ print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
 
+# attempt at extra credit 
+# used the class PPT with the seaborn slides 
+line_graph_response = input("Would you like a line graph depicting your stock's prices over time? [Y/N] ")
+if line_graph_response == "Y" or line_graph_response == "y":
+    prices_df = read_csv(csv_file_path)
+    sns.lineplot(data=prices_df, x="timestamp", y="close")
+else:
+    exit
